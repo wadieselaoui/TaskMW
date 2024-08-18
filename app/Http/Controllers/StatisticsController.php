@@ -47,4 +47,24 @@ class StatisticsController extends Controller
             'average_completion_time' => round($averageCompletionTime, 2),
         ];
     }
+    public function sendDailyNotifications()
+{
+    $users = User::all();
+
+    foreach ($users as $user) {
+        $statistics = $this->getStatistics($user, 'day');
+        $user->notify(new DailyTaskStatistics($statistics));
+    }
+}
+
+public function sendTestEmail()
+{
+    $user = Auth::user();
+    $statistics = $this->getStatistics($user, 'day');
+    $user->notify(new \App\Notifications\DailyTaskStatistics($statistics));
+    return 'Test email sent!';
+}
+
+
+
 }

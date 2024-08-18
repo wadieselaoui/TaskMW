@@ -23,9 +23,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics.index');
 
+    Route::get('/test-email', [StatisticsController::class, 'sendTestEmail'])->name('test.email');
+
     Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
-Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
 });
-
-
