@@ -8,18 +8,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f0f8ff; 
-            color: #333; 
+            background-color: #f0f8ff;
+            color: #333;
         }
         .welcome-container {
             text-align: center;
             padding: 50px;
         }
         .welcome-container h1 {
-            color: #007bff; 
+            color: #007bff;
         }
         .welcome-container p {
-            color: #555; 
+            color: #555;
         }
     </style>
 </head>

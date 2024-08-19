@@ -26,39 +26,8 @@
         </div>
     </div>
 </div>
+@endsection
 
-
-<style>
-    .container {
-        background-color: #f8f9fa;
-        padding: 20px;
-        border-radius: 8px;
-    }
-
-    .card {
-        border-radius: 8px;
-    }
-
-    .card-header {
-        border-bottom: 1px solid #dee2e6;
-    }
-
-    .btn-warning {
-        background-color: #ffc107;
-        border: none;
-    }
-
-    .btn-warning:hover {
-        background-color: #e0a800;
-    }
-
-    .btn-danger {
-        background-color: #dc3545;
-        border: none;
-    }
-
-    .btn-danger:hover {
-        background-color: #c82333;
-    }
-</style>
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/task-details.css') }}">
 @endsection
