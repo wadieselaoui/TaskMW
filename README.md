@@ -1,6 +1,6 @@
 # Todo App
 
-This is a Laravel-based Todo application with task management, email notifications, and statistics.
+This is a Laravel Todo application with task management, email notifications, and statistics.
 
 ## Requirements
 
@@ -25,6 +25,4 @@ This is a Laravel-based Todo application with task management, email notificatio
 
 
 
-## Testing
 
-Run `docker-compose exec app php artisan test` to execute the test suite.

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;  // Ensure you include the User model
+use App\Notifications\DailyTaskStatistics;
 use Carbon\Carbon;
 
 class StatisticsController extends Controller
@@ -24,6 +26,7 @@ class StatisticsController extends Controller
 
         return view('statistics.index', compact('totalTasks', 'completedTasks', 'inProgressTasks', 'pendingTasks', 'daily', 'weekly', 'monthly'));
     }
+
     private function getStatistics($user, $period)
     {
         $endDate = Carbon::now();
@@ -47,24 +50,18 @@ class StatisticsController extends Controller
             'average_completion_time' => round($averageCompletionTime, 2),
         ];
     }
+
     public function sendDailyNotifications()
-{
-    $users = User::all();
+    {
+        // Fetch all users from the database
+        $users = User::all();
 
-    foreach ($users as $user) {
-        $statistics = $this->getStatistics($user, 'day');
-        $user->notify(new DailyTaskStatistics($statistics));
+        foreach ($users as $user) {
+            // Get daily statistics for the current user
+            $statistics = $this->getStatistics($user, 'day');
+
+            // Send the notification with the user's statistics
+            $user->notify(new DailyTaskStatistics($statistics));
+        }
     }
-}
-
-public function sendTestEmail()
-{
-    $user = Auth::user();
-    $statistics = $this->getStatistics($user, 'day');
-    $user->notify(new \App\Notifications\DailyTaskStatistics($statistics));
-    return 'Test email sent!';
-}
-
-
-
 }

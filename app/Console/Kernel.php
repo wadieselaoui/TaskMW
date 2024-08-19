@@ -15,11 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-            app('App\Http\Controllers\StatisticsController')->sendDailyNotifications();
-        })->dailyAt('08:00');
+        $schedule->command('email:daily-statistics')->everyMinute();
     }
-
 
     /**
      * Register the commands for the application.
@@ -32,4 +29,5 @@ class Kernel extends ConsoleKernel
 
         require base_path('routes/console.php');
     }
+
 }
