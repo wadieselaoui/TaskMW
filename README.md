@@ -12,8 +12,9 @@ This is a Laravel Todo application with task management, email notifications, an
 1. Clone the repository
 2. Run `docker-compose up -d --build`
 3. Run `docker-compose exec app php artisan migrate`
-4. Access the application at `http://localhost`
-5. Access the emails at `http://localhost:8025`
+4. Sometimes if composer problem occurred you can run this command `docker-compose exec app composer install`
+5. Access the application at `http://localhost`
+6. Access the emails at `http://localhost:8025`
 
 ## Features
 

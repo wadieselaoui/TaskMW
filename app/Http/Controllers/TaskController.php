@@ -18,7 +18,7 @@ class TaskController extends Controller
     public function index()
     {
         Log::info('User ' . Auth::id() . ' accessed the task index page.');
-        
+
         $tasks = Auth::user()->tasks()->orderBy('created_at', 'desc')->get();
         return view('tasks.index', compact('tasks'));
     }
@@ -26,7 +26,7 @@ class TaskController extends Controller
     public function create()
     {
         Log::info('User ' . Auth::id() . ' accessed the create task page.');
-        
+
         return view('tasks.create');
     }
 
@@ -38,13 +38,13 @@ class TaskController extends Controller
             'title' => 'required|max:255',
             'description' => 'required',
         ]);
-    
+
         $task = new Task();
         $task->title = $request->title;
         $task->description = $request->description;
         $task->status = 'pending';
         $task->user_id = Auth::id();
-        $task->start_date = now(); 
+        $task->start_date = now();
         $task->save();
 
         Log::info('Task created successfully: ', $task->toArray());
@@ -105,10 +105,12 @@ class TaskController extends Controller
         Log::info('User ' . Auth::id() . ' is marking task ID: ' . $task->id . ' as completed.');
 
         $task->status = 'completed';
-        $task->end_date = now(); 
+        $task->end_date = now();
         $task->save();
 
         Log::info('Task marked as completed: ', $task->toArray());
+
+        $this->sendTaskNotification($task, 'completed');
 
         return redirect()->route('tasks.index')->with('success', 'Task marked as completed.');
     }
